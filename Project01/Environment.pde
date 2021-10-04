@@ -44,7 +44,7 @@ class Sun {
     ellipse(700, sunY, 80, 80);
   }
 
-  void sunLight() { //code take from my excersise 2
+  void sunLight() { //code taken from my excersise 2
     if (sunLightX != -100) { //expands the emitted light when the width is not -220
       sunLightX = sunLightX + 1;
       sunLightY = sunLightY + 1;
@@ -102,7 +102,7 @@ class Moon {
     ellipse(100, moonY, 80, 80);
   }
 
-  void moonLight() { //code take from my excersise 2
+  void moonLight() { //code taken from my excersise 2
     if (moonLightX != -100) { //expands the emitted light when the width is not -220
       moonLightX = moonLightX + 1;
       moonLightY = moonLightY + 1;

@@ -24,22 +24,22 @@ class Plant {
   }
 
   void update() {
-    if (currentPlant == plant4 && sunY == 100) {
+    if (currentPlant == plant4 && sunY == 100) { //plant changes face to really happy automatically when the sun reaches its max point
       currentFace = reallyHappy;
     }
-    if (currentPlant == plant4 && moonY == 100) {
+    if (currentPlant == plant4 && moonY == 100) { //plant goes to sleep automatically when the moon reaches its max point
       currentFace = sleep;
     }
   }
 
   void draw() {
-    image(currentPlant, 0, 0); //current plant display
+    image(currentPlant, 0, 0); //displays current plant 
     image(pot, 0, 0); //displays pot
     image(currentFace, 0, 0); //displays face
   }
 
   void clicked() {
-    if (sun.morning && sunY == 100) {
+    if (sun.morning && sunY == 100) { //when it's morning every click updates the plant and its face until it is full grown
       if (counter == 0) {
         currentPlant = plant1;
         counter = counter + 1;
@@ -57,7 +57,7 @@ class Plant {
         currentFace = reallyHappy;
       }
     } 
-    if (!sun.morning && moonY == 100) {
+    if (!sun.morning && moonY == 100) { //when the mouse is clicked during the night, the plant shrinks and gets sad the smaller it gets
       if (counter == 3) {
         currentPlant = plant3;
         currentFace = sleep;

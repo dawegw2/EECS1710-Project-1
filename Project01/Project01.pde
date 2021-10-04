@@ -1,7 +1,6 @@
 Plant plant;
 Sun sun;
 Moon moon;
-Animal a1;
 Cloud[] clouds = new Cloud[20];
 Star[] stars = new Star[30];
 Berry[] berries = new Berry[20];
@@ -29,19 +28,18 @@ void setup() {
   sun = new Sun();
   moon = new Moon();
   plant = new Plant();
-  a1 = new Animal();
 
   rectMode(CENTER);
 }
 
 void timeOfDay() {
   if (!sun.morning) {
-    background(111, 114, 151);
+    background(111, 114, 151); //night sky color
   }
 }
 
 void draw() {
-  background (147, 179, 207);
+  background (147, 179, 207); //morning sky color
 
   timeOfDay();
 
@@ -57,9 +55,9 @@ void draw() {
 
   for (int i = 0; i < stars.length; i = i + 1) { //creates stars when it's not morning and refreshes their positions when it is
     if (!sun.morning) {
-      stars[i].generateStar();
+      stars[i].generateStar(); //creates stars
     } else {
-      stars[i].newStars();
+      stars[i].newStars(); //repositions stars
     }
   }
 
@@ -79,24 +77,16 @@ void draw() {
 
   plant.run(); //draws and updates the plant's phase and current face 
 
-  for (int i = 0; i < berries.length; i = i + 1) { //creates berries when the plant is flly grown
+  for (int i = 0; i < berries.length; i = i + 1) { //creates berries when the plant is fully grown
     if (plant.currentPlant == plant.plant4) {
-      berries[i].position();
-      berries[i].grow();
-      berries[i].checkDistance();
-      berries[i].fall();
-      //a1.pickBerry();
-      //if (a1.overlaps(berries[a1.berryChoice])) {
-      //berries[a1.berryChoice].fall();
-      //}
+      berries[i].position(); //places berry in a rondom position with a random color and a size of 0
+      berries[i].growBerry(); //grow berry into a random size
+      berries[i].checkMouseDistance(); //checks distance between the mouse pointer and the berry's position
+      berries[i].dropBerry(); //once the mouse pointer is closs enough, the berry drops at a random speed
     } else {
-      berries[i].movePos();
+      berries[i].movePos(); //refreshes new berries next time plant is fully grown
     }
   }
-
-  //a1.moveAnimal();
-  //a1.animal();
-  //a1.checkAnimal();
 }
 
 void mousePressed() {
