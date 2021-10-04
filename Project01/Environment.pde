@@ -4,9 +4,12 @@ class Sun {
   float shineAmount = 50;
   float shineIncrement = 1;
   boolean morning;
+  
+  void checkMorning() {
+  }
 
   void sunRise() {
-    if (mouseX > width/2 + 200) {
+    if (mouseX > width/2 + 200) { //calls moveSun() function when the mouse pointer is on the right side of the window
       moveSun();
       if (sunY < 600) {
         morning = true;
@@ -15,12 +18,12 @@ class Sun {
     }
   }
 
-  void moveSun() {
+  void moveSun() { //moves sun up by 5 and moon down by 5 using their y values
     sunY = sunY - 5;
     moonY = moonY + 5;
   }
 
-  void checkRisen() {
+  void checkRisen() { //checks when to stop the sun from rising
     if (sunY < 100) {
       stopRising();
     }
@@ -29,9 +32,7 @@ class Sun {
   void stopRising() { //stops sun from rising and stops moon from setting
     sunY = 100;
     moonY = 800;
-    if (currentPlant == plant4 && sunY == 100) {
-      currentFace = reallyHappy;
-    }
+
   }
 
   void display() { //draws sun 
@@ -43,7 +44,7 @@ class Sun {
     ellipse(700, sunY, 80, 80);
   }
 
-  void sunLight() {
+  void sunLight() { //code take from my excersise 2
     if (sunLightX != -100) { //expands the emitted light when the width is not -220
       sunLightX = sunLightX + 1;
       sunLightY = sunLightY + 1;
@@ -67,7 +68,7 @@ class Moon {
   float shineAmount = 50;
   float shineIncrement = 1;
 
-  void moonRise() {
+  void moonRise() { 
     if (mouseX < width/2 - 200) {
       moveMoon();
       if (moonY < 600) {
@@ -76,7 +77,7 @@ class Moon {
     }
   }
 
-  void moveMoon() {
+  void moveMoon() { //moves moon up by 5 and sun down by 5
     moonY = moonY - 5;
     sunY = sunY + 5;
   }
@@ -84,12 +85,9 @@ class Moon {
   void stopRising() { //stops moon from rising and stops sun from setting
     moonY = 100;
     sunY = 800;
-    if (currentPlant == plant4 && moonY == 100) {
-      currentFace = sleep;
-    }
   }
 
-  void checkRisen() {
+  void checkRisen() { //checks when to stop the moon from rising
     if (moonY < 100) {
       stopRising();
     }
@@ -104,7 +102,7 @@ class Moon {
     ellipse(100, moonY, 80, 80);
   }
 
-  void moonLight() {
+  void moonLight() { //code take from my excersise 2
     if (moonLightX != -100) { //expands the emitted light when the width is not -220
       moonLightX = moonLightX + 1;
       moonLightY = moonLightY + 1;
@@ -158,7 +156,7 @@ class Cloud {
     cloudY = random(0, 200);
     cloudWidth = random(50, 80);
     cloudHeight = random (10, 100);
-    randVal = random(50, 100);
+    randVal = random(30, 100);
     cloudSpeed = random(1, 3);
   }
 
