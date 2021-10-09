@@ -14,14 +14,16 @@ class Berry {
     dropSpeed = 5;
   }
 
-  void position() {  //determines color and position of each berry  
+//determines color and position of each berry  
+  void position() {  
     fill(berryColor);
     stroke(0);
     strokeWeight(5);
     ellipse(berryX, berryY, 0 + increment, 0 + increment);
   }
 
-  void growBerry() { //grows berries to its random sized value
+//grows berries to its random sized value
+  void growBerry() {
     if (increment < sizeVal) {
       increment = increment + 1; //increment increases the size of the berries
     }

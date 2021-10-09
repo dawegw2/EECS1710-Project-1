@@ -1,6 +1,7 @@
 Plant plant;
 Sun sun;
 Moon moon;
+Sky sky;
 Cloud[] clouds = new Cloud[20];
 Star[] stars = new Star[30];
 Berry[] berries = new Berry[20];
@@ -28,21 +29,15 @@ void setup() {
   sun = new Sun();
   moon = new Moon();
   plant = new Plant();
+  sky = new Sky();
 
   rectMode(CENTER);
 }
 
-void timeOfDay() {
-  if (!sun.morning) {
-    background(111, 114, 151); //night sky color
-  }
-}
-
 void draw() {
-  background (147, 179, 207); //morning sky color
-
-  timeOfDay();
-
+  
+  sky.run();
+  
   for (int i = 0; i < clouds.length; i = i + 1) { //creates clouds in the morning and new clouds at new positiions during night time
     if (sun.morning) {
       clouds[i].displayClouds(); //draw the clouds 
@@ -72,7 +67,7 @@ void draw() {
   moon.checkRisen();
 
   strokeWeight(3);
-  fill(255, 223, 211);
+  fill(254, 220, 213);
   rect(width/2, 750, width, 100); 
 
   plant.run(); //draws and updates the plant's phase and current face 

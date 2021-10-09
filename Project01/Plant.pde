@@ -32,6 +32,7 @@ class Plant {
     }
   }
 
+//draws the current plant phase an its face
   void draw() {
     image(currentPlant, 0, 0); //displays current plant 
     image(pot, 0, 0); //displays pot

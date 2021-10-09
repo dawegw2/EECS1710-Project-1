@@ -4,7 +4,7 @@ class Sun {
   float shineAmount = 50;
   float shineIncrement = 1;
   boolean morning;
-  
+
   void checkMorning() {
   }
 
@@ -18,24 +18,27 @@ class Sun {
     }
   }
 
-  void moveSun() { //moves sun up by 5 and moon down by 5 using their y values
+//moves sun up by 5 and moon down by 5 using their y values
+  void moveSun() { 
     sunY = sunY - 5;
     moonY = moonY + 5;
   }
-
-  void checkRisen() { //checks when to stop the sun from rising
+  
+//checks when to stop the sun from rising
+  void checkRisen() { 
     if (sunY < 100) {
       stopRising();
     }
   }
 
-  void stopRising() { //stops sun from rising and stops moon from setting
+//stops sun from rising and stops moon from setting
+  void stopRising() { 
     sunY = 100;
     moonY = 800;
-
   }
 
-  void display() { //draws sun 
+//draws sun 
+  void display() { 
     fill(255, 228, 132, shineAmount);
     noStroke();
     ellipse(700, sunY, sunLightX, sunLightY);
@@ -77,23 +80,26 @@ class Moon {
     }
   }
 
-  void moveMoon() { //moves moon up by 5 and sun down by 5
+//moves moon up by 5 and sun down by 5
+  void moveMoon() { 
     moonY = moonY - 5;
     sunY = sunY + 5;
   }
 
-  void stopRising() { //stops moon from rising and stops sun from setting
+//stops moon from rising and stops sun from setting
+  void stopRising() { 
     moonY = 100;
     sunY = 800;
   }
-
-  void checkRisen() { //checks when to stop the moon from rising
+  
+//checks when to stop the moon from rising
+  void checkRisen() { 
     if (moonY < 100) {
       stopRising();
     }
   }
 
-  void display() { //draws moon
+  void display() { 
     fill(250, 241, 193, shineAmount);
     noStroke();
     ellipse(100, moonY, moonLightX, moonLightY);
@@ -150,7 +156,7 @@ class Cloud {
   float cloudHeight;
   float randVal;
   float cloudSpeed;
-  
+
   Cloud() {
     cloudX = random(width);
     cloudY = random(0, 200);
@@ -173,15 +179,34 @@ class Cloud {
     cloudHeight = random (10, 100);
     randVal = random(50, 100);
   }
-  
+
   void moveClouds() {
     cloudX = cloudX + cloudSpeed;
-    
   }
-  
+
   void cloudBoundries() {
     if (cloudX > width + 200 || cloudX < -200) {
       cloudSpeed = cloudSpeed * -1;
     }
+  }
+}
+
+class Sky {
+  color col;
+  color newCol;
+  float lerpSpeed;
+
+  Sky() {
+    lerpSpeed =  1;
+  }
+
+  void run() {
+    float r = map(moonY, 0, width, 111, 147);
+    float g = map(moonY, 0, width, 114, 179);
+    float b = map(moonY, 0, width, 151, 207);
+    newCol = color(r, g, b, 100);
+
+    col = lerpColor(col, newCol, lerpSpeed);
+    background(col);
   }
 }
