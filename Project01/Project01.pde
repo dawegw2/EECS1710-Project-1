@@ -4,19 +4,18 @@ Moon moon;
 Sky sky;
 Cloud[] clouds = new Cloud[20];
 Star[] stars = new Star[30];
-Berry[] berries = new Berry[20];
+ArrayList<Berry> berries;
 
 float sunY = 100;
 float moonY = 800;
 float fallSpeed = 5;
-color berryColor;
+int numBerries = 15;
+color berryColor = color(255, 127, 127);
 
 void setup() {
   size(800, 800);
 
-  for (int i = 0; i < berries.length; i = i + 1) {
-    berries[i] = new Berry();
-  }
+  berries = new ArrayList<Berry>();
 
   for (int i = 0; i < stars.length; i = i + 1) {
     stars[i] = new Star();
@@ -35,55 +34,67 @@ void setup() {
 }
 
 void draw() {
-  
+
+  //changes background/sky color
   sky.run();
-  
-  for (int i = 0; i < clouds.length; i = i + 1) { //creates clouds in the morning and new clouds at new positiions during night time
+
+  //creates clouds in the morning and new clouds at new positiions during night time
+  for (int i = 0; i < clouds.length; i = i + 1) { 
     if (sun.morning) {
-      clouds[i].displayClouds(); //draw the clouds 
-      clouds[i].moveClouds(); //moves the clouds by increasing the x values
-      clouds[i].cloudBoundries(); //checks when to move clouds in the opposite direction by decreasing the x values
+      clouds[i].run();
     } else {
       clouds[i].newClouds(); //refreshes all of the values for the clouds, including the size and x and y values
     }
   }
 
-  for (int i = 0; i < stars.length; i = i + 1) { //creates stars when it's not morning and refreshes their positions when it is
+  //creates stars when it's not morning and refreshes their positions when it is
+  for (int i = 0; i < stars.length; i = i + 1) { 
     if (!sun.morning) {
       stars[i].generateStar(); //creates stars
     } else {
       stars[i].newStars(); //repositions stars
     }
   }
-
-  sun.display();
-  sun.sunRise();
-  sun.sunLight();
-  sun.checkRisen();
-
-  moon.display();
-  moon.moonRise();
-  moon.moonLight();
-  moon.checkRisen();
+  //displays and moves the sun a moon
+  sun.run();
+  moon.run();
 
   strokeWeight(3);
   fill(254, 220, 213);
   rect(width/2, 750, width, 100); 
 
-  plant.run(); //draws and updates the plant's phase and current face 
+  int s = second();
+  //println(s);
+  //adds new berries every 5th seconds for each berry that was removed 
+  for (int i = 0; i < numBerries; i++) {
+    if (berries.size() < 15 && sun.morning) {
+      if (s % 5 == 0) {   
+        berries.add(new Berry());
+      }
+    }
+  } 
 
-  for (int i = 0; i < berries.length; i = i + 1) { //creates berries when the plant is fully grown
+  //draws and updates the plant's phase and current face 
+  plant.run(); 
+
+  //creates berries when the plant is fully grown
+  for (int i = berries.size() - 1; i >= 0; i--) { 
+    Berry b = berries.get(i);
     if (plant.currentPlant == plant.plant4) {
-      berries[i].position(); //places berry in a rondom position with a random color and a size of 0
-      berries[i].growBerry(); //grow berry into a random size
-      berries[i].checkMouseDistance(); //checks distance between the mouse pointer and the berry's position
-      berries[i].dropBerry(); //once the mouse pointer is closs enough, the berry drops at a random speed
+      b.run();
     } else {
-      berries[i].movePos(); //refreshes new berries next time plant is fully grown
+      b.movePos(); //refreshes new berries next time plant is fully grown
+    }
+    if (b.isPicked()) {
+      berries.remove(i);
+    }
+//!sun.morning && 
+    if ((berries.size() <= 0) || plant.currentPlant == plant.plant3) {
+      b.changeCol();
     }
   }
 }
 
 void mousePressed() {
-  plant.clicked();
+  plant.changePlantPhase();
 }

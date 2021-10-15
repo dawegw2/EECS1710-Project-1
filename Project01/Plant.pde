@@ -39,7 +39,7 @@ class Plant {
     image(currentFace, 0, 0); //displays face
   }
 
-  void clicked() {
+  void changePlantPhase() {
     if (sun.morning && sunY == 100) { //when it's morning every click updates the plant and its face until it is full grown
       if (counter == 0) {
         currentPlant = plant1;
@@ -76,7 +76,7 @@ class Plant {
         currentFace = pot;
       }
     }
-    println(counter);
+    //println(counter);
   }
 
   void run() {

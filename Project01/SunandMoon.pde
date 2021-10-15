@@ -18,26 +18,26 @@ class Sun {
     }
   }
 
-//moves sun up by 5 and moon down by 5 using their y values
+  //moves sun up by 5 and moon down by 5 using their y values
   void moveSun() { 
     sunY = sunY - 5;
     moonY = moonY + 5;
   }
-  
-//checks when to stop the sun from rising
+
+  //checks when to stop the sun from rising
   void checkRisen() { 
     if (sunY < 100) {
       stopRising();
     }
   }
 
-//stops sun from rising and stops moon from setting
+  //stops sun from rising and stops moon from setting
   void stopRising() { 
     sunY = 100;
     moonY = 800;
   }
 
-//draws sun 
+  //draws sun 
   void display() { 
     fill(255, 228, 132, shineAmount);
     noStroke();
@@ -63,6 +63,13 @@ class Sun {
       shineIncrement = -1;
     }
   }
+
+  void run() {
+    display();
+    sunRise();
+    sunLight();
+    checkRisen();
+  }
 }
 
 class Moon {
@@ -80,19 +87,19 @@ class Moon {
     }
   }
 
-//moves moon up by 5 and sun down by 5
+  //moves moon up by 5 and sun down by 5
   void moveMoon() { 
     moonY = moonY - 5;
     sunY = sunY + 5;
   }
 
-//stops moon from rising and stops sun from setting
+  //stops moon from rising and stops sun from setting
   void stopRising() { 
     moonY = 100;
     sunY = 800;
   }
-  
-//checks when to stop the moon from rising
+
+  //checks when to stop the moon from rising
   void checkRisen() { 
     if (moonY < 100) {
       stopRising();
@@ -124,89 +131,11 @@ class Moon {
       shineIncrement = -1;
     }
   }
-}
-
-class Star {
-  float starSize;
-  float x;
-  float y;
-
-  Star() {
-    starSize = random(5, 12);
-    x = random(800);
-    y = random(500);
-  }
-
-  void generateStar() {
-    fill(255, random(50, 150));
-    noStroke();
-    ellipse(x, y, starSize, starSize);
-  }
-
-  void newStars() {
-    x = random(800);
-    y = random(400);
-  }
-}
-
-class Cloud {
-  float cloudX;
-  float cloudY;
-  float cloudWidth;
-  float cloudHeight;
-  float randVal;
-  float cloudSpeed;
-
-  Cloud() {
-    cloudX = random(width);
-    cloudY = random(0, 200);
-    cloudWidth = random(50, 80);
-    cloudHeight = random (10, 100);
-    randVal = random(30, 100);
-    cloudSpeed = random(1, 3);
-  }
-
-  void displayClouds() {
-    noStroke();
-    fill(255, randVal);
-    rect(cloudX, cloudY, cloudWidth, cloudHeight);
-  }
-
-  void newClouds() {
-    cloudX = random(width);
-    cloudY = random(0, 200);
-    cloudWidth = random(50, 80);
-    cloudHeight = random (10, 100);
-    randVal = random(50, 100);
-  }
-
-  void moveClouds() {
-    cloudX = cloudX + cloudSpeed;
-  }
-
-  void cloudBoundries() {
-    if (cloudX > width + 200 || cloudX < -200) {
-      cloudSpeed = cloudSpeed * -1;
-    }
-  }
-}
-
-class Sky {
-  color col;
-  color newCol;
-  float lerpSpeed;
-
-  Sky() {
-    lerpSpeed =  1;
-  }
 
   void run() {
-    float r = map(moonY, 0, width, 111, 147);
-    float g = map(moonY, 0, width, 114, 179);
-    float b = map(moonY, 0, width, 151, 207);
-    newCol = color(r, g, b, 100);
-
-    col = lerpColor(col, newCol, lerpSpeed);
-    background(col);
+    display();
+    moonRise();
+    moonLight();
+    checkRisen();
   }
 }
