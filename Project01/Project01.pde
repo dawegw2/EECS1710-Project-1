@@ -64,10 +64,10 @@ void draw() {
   rect(width/2, 750, width, 100); 
 
   int s = second();
-  //println(s);
+  println(s);
   //adds new berries every 5th seconds for each berry that was removed 
   for (int i = 0; i < numBerries; i++) {
-    if (berries.size() < 15 && sun.morning) {
+    if (berries.size() < 20 && sun.morning) {
       if (s % 5 == 0) {   
         berries.add(new Berry());
       }
