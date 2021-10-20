@@ -7,6 +7,7 @@ class Sky {
     lerpSpeed =  1;
   }
 
+// learned in lecture
   void run() {
     float r = map(moonY, 0, width, 111, 147);
     float g = map(moonY, 0, width, 114, 179);
