@@ -47,22 +47,22 @@ class Berry {
 
   void checkMouseDistance() { 
     float d = dist(berryX, berryY, mouseX, mouseY); //measures distance from a berry's (x,y) to the mouse pointer's position
-    if (d < 20) { //if the distance is less than 50, sets boolean picked to true
+    if (d < 20) { //if the distance is less than 20, sets boolean picked to true
       picked = true;
       println(picked);
     }
   }
 
   void dropBerry() {
-    if (picked == true && berryY < height + 30) { //occurs when the berry y value is not outide the window and picked is true 
+    if (picked == true) { //occurs when the berry y value is not outide the window and picked is true 
       dropSpeed = int(random(3, 10)); //randomizes drop speed of each berry 
-      newBerryY();
+      fall();
     } else {
       picked = false;
     }
   }
 
-  void newBerryY() {
+  void fall() {
     berryY = berryY + dropSpeed;
   }
 
